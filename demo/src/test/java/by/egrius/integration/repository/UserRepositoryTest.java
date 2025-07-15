@@ -1,8 +1,8 @@
 package by.egrius.integration.repository;
 
 import by.egrius.TestApplicationRunner;
-import by.egrius.TodoListApplication;
 import by.egrius.database.repository.UserRepository;
+import com.sun.tools.javac.Main;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
+@RequiredArgsConstructor
 @SpringBootTest(classes = {
         TestApplicationRunner.class,
-        TodoListApplication.class
+        Main.class
 })
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @Transactional
 class UserRepositoryTest {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Test
     void test() {

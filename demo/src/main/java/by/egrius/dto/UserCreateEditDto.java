@@ -1,6 +1,4 @@
 package by.egrius.dto;
-
-
 import lombok.Value;
 
 @Value
