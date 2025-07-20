@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-todos
+      id: create-todos-table
       author: Egrius
       changes:
         - createTable:
@@ -44,7 +44,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: title
-                  type: TEXT
+                  type: VARCHAR(255)
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:

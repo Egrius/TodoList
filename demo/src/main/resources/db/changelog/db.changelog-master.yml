@@ -1,5 +1,0 @@
-databaseChangelog:
-  - include:
-      file: db/changelog/changeset/create-user-table.yml
-  - include:
-      file: db/changelog/changeset/create-todos-table.yml
