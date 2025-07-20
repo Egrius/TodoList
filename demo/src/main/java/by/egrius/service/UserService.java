@@ -25,6 +25,11 @@ public class UserService {
         return userRepository.findById(id).map(userReadMapper::map);
     }
 
+    public Optional<UserReadDto> findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(userReadMapper::map);
+    }
+
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
@@ -50,7 +55,14 @@ public class UserService {
 
     }
 
-    // public boolean delete(Long userId, String passwordHash) { }
+    public boolean delete(Long userId) {
+        return userRepository.findById(userId).map(
+                user  -> {
+                    userRepository.delete(user);
+                    return true;
+                }
+        ).orElse(false);
+    }
 
     // public List<UserReadDto> findAll(UserFilter) { }
 }

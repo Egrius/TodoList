@@ -36,7 +36,6 @@ class UserServiceTest {
     @Mock
     private UserCreateEditMapper userCreateEditMapper;
 
-
     @Mock
     private UserCreateEditDto userCreateEditDto;
 
@@ -155,6 +154,12 @@ class UserServiceTest {
 
     @Test
     void deleteTest() {
+        Long userId = 2L;
+        User mockUser = new User(userId, "firstName", "email", "1234", Collections.emptyList());
+        when(userRepository.findById(userId)).thenReturn(Optional.of(mockUser));
 
+        boolean actualResult = userService.delete(userId);
+
+        assertTrue(actualResult);
     }
  }
