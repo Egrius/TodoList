@@ -19,7 +19,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserReadMapper userReadMapper;
     private final UserCreateEditMapper userCreateEditMapper;
-    // private final PasswordEncoder passwordEncoder;
 
     public Optional<UserReadDto> findById(Long id) {
         return userRepository.findById(id).map(userReadMapper::map);
@@ -48,13 +47,18 @@ public class UserService {
     @Transactional
     public UserReadDto update(Long id, UserCreateEditDto object) {
         return userRepository.findById(id)
-                .map(entity -> userCreateEditMapper.map(object))
-                .map(userRepository::saveAndFlush)
+                .map(entity -> {
+                    entity.setUsername(object.getUsername());
+                    entity.setEmail(object.getEmail()); // даже если email не меняется — всё нормально
+                    entity.setPassword(object.getPassword());
+                    return userRepository.saveAndFlush(entity);
+        })
                 .map(userReadMapper::map)
                 .orElseThrow();
 
     }
 
+    @Transactional
     public boolean delete(Long userId) {
         return userRepository.findById(userId).map(
                 user  -> {
@@ -63,6 +67,4 @@ public class UserService {
                 }
         ).orElse(false);
     }
-
-    // public List<UserReadDto> findAll(UserFilter) { }
 }

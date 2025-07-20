@@ -9,6 +9,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @TestConfiguration
 @EnableJpaRepositories
 public class TestApplicationRunner {
-//    @Autowired
-//    public UserRepository userRepository;
+
 }
